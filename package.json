@@ -1,0 +1,33 @@
+{
+  "name": "live-markdown-viewer",
+  "version": "1.0.0",
+  "productName": "Live Markdown Viewer",
+  "description": "Automatically render (and reload) markdown in the style of github",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tedroden/live-markdown-viewer.git"
+  },
+  "keywords": [
+    "github",
+    "markdown",
+    "org-mode"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/tedroden/live-markdown-viewer/issues"
+  },
+  "homepage": "https://github.com/tedroden/live-markdown-viewer",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  },
+  "dependencies": {
+    "highlight.js": "^9.1.0",
+    "marked": "^0.3.5",
+    "md5": "^2.0.0"
+  }
+}
