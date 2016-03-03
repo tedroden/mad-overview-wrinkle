@@ -12,7 +12,7 @@ var anagrams = ["A Wrinkled View Mover",
 				"Invader Were Milk Vow",
 				"Arrived Ween Milk Vow",
 				"Arrived Winkle Em Vow",
-				"Waived Nerve Ilk Worm",
+				"Waived Nerve Ilk Worm"
 			   ];
 
 

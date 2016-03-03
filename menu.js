@@ -1,4 +1,7 @@
 
+// var Menu = require('menu');
+// var MenuItem = require('menu-item');
+const remote = require('electron').remote;  
 const Menu = remote.Menu;
 const MenuItem = remote.MenuItem;
 
@@ -14,7 +17,7 @@ var menuTemplate = [
 				label: 'Quit',
 				accelerator: 'CmdOrCtrl+Q',
 				role: 'quit'
-			},				
+			}
 		]
 	},	
 	{
@@ -34,20 +37,20 @@ var menuTemplate = [
 					}
 				}
 			},
-			{
-				label: 'Toggle Dev Tools',
-				accelerator: 'CmdOrCtrl+I',
-				click: function(item, win) {
-					win.toggleDevTools();
-				}
-			},							
+			// {
+			// 	label: 'Toggle Dev Tools',
+			// 	accelerator: 'CmdOrCtrl+I',
+			// 	click: function(item, win) {
+			// 		win.toggleDevTools();
+			// 	}
+			// },							
 			{
 				label: 'Close Window',
 				accelerator: 'CmdOrCtrl+W',
 				role: 'close'
-			},
-			]
-	},
+			}
+		]
+	}
 ];
 
 var menu = Menu.buildFromTemplate(menuTemplate);

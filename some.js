@@ -2,13 +2,13 @@
 var app = angular.module('MarkdownViewerApp', ['ngMaterial']);
 
 const ipcRenderer = require('electron').ipcRenderer;
-const remote = require('electron').remote;
 
-function showOpenDialog() {
-	ipcRenderer.send('asynchronous-message', 'show-open-dialog');	
+function sendMessage(msg) {
+    console.log("SENDING MESSAGE: " + msg);
+	ipcRenderer.send('asynchronous-message', msg);	
 }
 
 ipcRenderer.on('asynchronous-reply', function(event, arg) {
-	console.log(arg); // prints "pong"
+	// console.log(arg); // we don't have anything to do here.
 });
 
