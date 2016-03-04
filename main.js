@@ -171,7 +171,6 @@ function createWindow () {
 
     // window.toggleDevTools();
     window.on('resize', function(data) {
-        console.log("resize");
 	    window.webContents.send('resize', 'now');
     });
 
