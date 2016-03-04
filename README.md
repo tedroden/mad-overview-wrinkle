@@ -25,11 +25,10 @@ How does it work?
 
 ## TODO
 
-0. Make it installable without the steps above
-0. Make links open outside the window
-0. Fix the hamburger menu.
-0. Fix [bugs](https://github.com/tedroden/mad-overview-wrinkle/issues)
-
+ - [ ] Make it installable without the steps above
+ - [ ] Make all links open outside the window
+ - [ ] Fix the hamburger menu positioning
+ - [ ] Fix [bugs](https://github.com/tedroden/mad-overview-wrinkle/issues)
 
 ### Credits
 
