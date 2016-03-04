@@ -7,6 +7,9 @@ How does it work?
 0. Edit your code in any editor.
 0. Look at it.
 
+[Download it here](https://github.com/tedroden/mad-overview-wrinkle/releases)
+
+
 ## What does it look like?
 
 ![Viewing a file on a Mac](images/osx.png)
@@ -25,7 +28,7 @@ How does it work?
 
 ## TODO
 
- - [ ] Make it installable without the steps above
+ - [x] Make it installable without the steps above [View Releases](https://github.com/tedroden/mad-overview-wrinkle/releases)
  - [ ] Make all links open outside the window
  - [ ] Fix the hamburger menu positioning
  - [ ] Fix [bugs](https://github.com/tedroden/mad-overview-wrinkle/issues)
