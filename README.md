@@ -1,6 +1,6 @@
 # Mad Overview Wrinkle 
 
-**Mad Overview Wrinkle** is a **Live Markdown Viewer**. It monitors a markdown file, automatically converts it to HTML, and renders it in a pretty window. Specifically it tries to show you what the file will look like on github.
+**Mad Overview Wrinkle** is a **Live Markdown Viewer**. It monitors a markdown file, automatically converts it to HTML, and renders it in a pretty window. Specifically, it tries to show you what the file will look like on github.
 
 How does it work?
 
@@ -25,7 +25,7 @@ How does it work?
 
 0. Make it installable without the steps above
 0. Make links open outside the window
-0. Fix the hamburger menu positioning
+0. Fix the hamburger menu.
 0. Fix [bugs](https://github.com/tedroden/mad-overview-wrinkle/issues)
 
 

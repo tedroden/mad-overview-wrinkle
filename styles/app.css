@@ -1,13 +1,9 @@
-/* body { */
-/* 	padding: 3em; */
-/* 	padding-top: 1em; */
-/* }; */
-
-md-toolbar {
+.md-toolbar-tools {
+	/* overflow: hidden; */
 	-webkit-app-region: drag;
 }
 
 .no-drag {
-	-webkit-app-region: no-drag;
-};
+    -webkit-app-region: no-drag;
+}
 

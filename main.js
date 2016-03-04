@@ -5,7 +5,9 @@ const electron = require('electron');
 const dialog = require('electron').dialog;
 const menu = require('electron').menu;
 const ipc = require('electron').ipcMain;
+const ipcRenderer = require('electron').ipcRenderer;
 const path = require('path');
+const shell = require('electron').shell;
 
 // for our app
 const marked = require('marked');
@@ -31,7 +33,6 @@ var HEADER = "<html><head>" +
 	"<link rel='stylesheet' href='" + __dirname + "/styles/github-markdown.css'> \n" +
 	"<link rel='stylesheet' href='" + __dirname + "/styles/highlight/github.css'> \n" +
 	"<script type='text/javascript' src='" + __dirname + "/some.js'></script>\n" +
-//	"<script type='text/javascript' src='" + __dirname + "/menu.js'></script>\n" +	  
 	"</head><body><div class='markdown-body'> ";
 
 var FOOTER = "</div></body></html>";
@@ -96,14 +97,14 @@ ipc.on('asynchronous-message', function(event, arg) {
 	console.log(arg);  // prints "ping"
 });
 
+ipc.on('open-url', function(event, arg) {
+    shell.openExternal(arg);
+});
+
 function getHeader(bodyClass) {
     return HEADER;
-    // if(!HEADER) {
-    //     console.log(__dirname + "/header.html");
-	//     HEADER = fs.readFileSync(__dirname + "/header.html");
-    // }
-    // return HEADER;
 }
+
 function getOutputDir(fn) {
     // FIXME: will "/" work on windows?
     return path.resolve(path.dirname(fn)) + "/";
@@ -121,11 +122,12 @@ function monitor(fn, window) {
 	// fixme: we can probably just check the last updated time
 	fs.readFile(fn, 'utf8', function (err,data) {
         
-		if (err) { return console.log(err); }
-        
+		if (err) { return console.log(err);}
+
+
 		var file = {
 			"input": fn,
-			"output": getOutputDir(fn) + FILE_START + md5(data) + ".html",
+			"output": getOutputDir(fn) + FILE_START + md5(fn) + ".html",
 			"md5": null
 		};
 
@@ -139,9 +141,10 @@ function monitor(fn, window) {
 		var html = getHeader('markdown-body') + marked(data, { renderer: renderer }) + FOOTER;
 		fs.writeFile(file.output, html);
 
-		// load it.
-		window.loadURL("file://" + file.output);
-
+		// // load it.
+        // console.log(window.webContents);
+	    window.webContents.send('load-url', "file://" + file.output);
+        window.loadedURL = file.output;
         return null;
 	});
 	setTimeout(function() { monitor(fn, window); }, 1000);
@@ -157,22 +160,30 @@ function createWindow () {
 	var window = new BrowserWindow({width: WIDTH, height: HEIGHT, title: APP_TITLE, frame: false});
 	window.onbeforeunload = function(e) { console.log("ON BEFORE!"); }
 
-	if(process.argv.length != 3) {
-		var intro_url =  'file://' + __dirname + '/intro.html';
-		window.loadURL(intro_url);
-	}
-	else {
+    // load the main frame...
+	var intro_url =  'file://' + __dirname + '/mainframe.html';
+	window.loadURL(intro_url);
+
+	if(process.argv.length == 3) {
 		markdown_file = process.argv[2];
 		monitor(markdown_file, window);		
 	}
 
-//    window.toggleDevTools();
+    window.toggleDevTools();
+    window.on('resize', function(data) {
+        console.log("resize");
+	    window.webContents.send('resize', 'now');
+    });
+
     window.on('close', function(data) {
         // delete the file
-        var p = window.getURL().replace("file://", "");
-        if(p.indexOf(FILE_START) === 0) {
+        var p = window.loadedURL;
+        if(path.basename(p).indexOf(FILE_START) === 0) {
             console.log("Cleaning up: " + path.basename(p));
             fs.unlink(p);
+        }
+        else{
+            console.log("Didn't clean up: " + p);
         }
     });
 
