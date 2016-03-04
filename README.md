@@ -9,9 +9,9 @@ How does it work?
 
 ## What does it look like?
 
-![Editing some markdown](images/workers.png)
+![Viewing a file on a Mac](images/osx.png)
 ----
-![The welcome screen](images/welcome.png)
+![Editing some markdown](images/workers.png)
 ----
 ![Pretending to edit a markdown file](images/preview-01.png)
 
