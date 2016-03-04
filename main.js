@@ -169,7 +169,7 @@ function createWindow () {
 		monitor(markdown_file, window);		
 	}
 
-    window.toggleDevTools();
+    // window.toggleDevTools();
     window.on('resize', function(data) {
         console.log("resize");
 	    window.webContents.send('resize', 'now');
