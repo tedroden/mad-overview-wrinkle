@@ -9,8 +9,10 @@ How does it work?
 
 ## What does it look like?
 
+![Editing some markdown](images/workers.png)
+----
 ![The welcome screen](images/welcome.png)
-
+----
 ![Pretending to edit a markdown file](images/preview-01.png)
 
 
