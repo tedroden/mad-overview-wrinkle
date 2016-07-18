@@ -95,7 +95,6 @@ ipc.on('asynchronous-message', function(event, arg) {
         event.sender.getOwnerBrowserWindow().close();
     }
     
-    console.log(arg);  // prints "ping"
 });
 
 ipc.on('open-url', function(event, arg) {
@@ -125,7 +124,6 @@ function monitor(fn, window) {
         
 	if (err) { return console.log(err);}
 
-
 	var file = {
 	    "input": fn,
 	    "output": getOutputDir(fn) + FILE_START + md5(fn) + ".html",
@@ -151,10 +149,6 @@ function monitor(fn, window) {
     setTimeout(function() { monitor(fn, window); }, 1000);
 }
 
-function doThing() {
-    console.log("Doing thing");
-}
-
 function createWindow () {
     
     // Create the browser window.
@@ -172,7 +166,6 @@ function createWindow () {
 
     // window.toggleDevTools();
     window.on('resize', function(data) {
-        console.log("resize");
 	window.webContents.send('resize', 'now');
     });
 
