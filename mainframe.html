@@ -1,50 +1,50 @@
 <html lang="en" ng-app="MarkdownViewerApp">
   <head>
 
-	<link rel="stylesheet" href="styles/angular-material.min.css">
+    <link rel="stylesheet" href="styles/angular-material.min.css">
     <link rel="stylesheet" href="styles/app.css">
-	
-	<!-- Angular Material requires Angular.js Libraries -->
-	<script src="js/angular.min.js"></script>
-	<script src="js/angular-animate.min.js"></script>
-	<script src="js/angular-aria.min.js"></script>
-	<script src="js/angular-messages.min.js"></script>
-
-	<!-- Angular Material Library -->
-	<script src="js/angular-material.min.js"></script>
-	
-	<script type="text/javascript" src="some.js"></script>
-	<!-- menu must be loaded via html -->
-	<script type="text/javascript" src="menu.js"></script>
-	<script type="text/javascript" src="intro.js"></script>
-
+    
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-aria.min.js"></script>
+    <script src="js/angular-messages.min.js"></script>
+    
+    <!-- Angular Material Library -->
+    <script src="js/angular-material.min.js"></script>
+    
+    <script type="text/javascript" src="some.js"></script>
+    <!-- menu must be loaded via html -->
+    <script type="text/javascript" src="menu.js"></script>
+    <script type="text/javascript" src="intro.js"></script>
+    
   </head>
   <body ng-controller="IntroCtrl">
 	
 	<md-toolbar>
 	  <div class="md-toolbar-tools" id="toolbar">
-		<h1>{{ anagram }}</h1>
-		<span flex></span>
-
-		<md-menu-bar >
-          <md-menu class="no-drag">
-			<md-button class="no-drag" ng-click="$mdOpenMenu()">
-			  <md-icon  style="fill: black;" md-menu-origin md-svg-icon="svg/menu.svg"></md-icon>
-			</md-button>
-            <md-menu-content>
-              <md-menu-item><md-button onclick="sendMessage('show-open-dialog')">Open ...</md-button></md-menu-item>
-              <md-menu-item><md-button onclick="sendMessage('new-window')">New Window</md-button></md-menu-item>			  
-            </md-menu-content>			
-		  </md-menu>
-		</md-menu-bar>
-		
-
-		<md-button class="no-drag md-icon-button" aria-label="Close" onclick="sendMessage('window-close');">
-          <md-icon class="no-drag" md-svg-icon="svg/close.svg"></md-icon>
-		</md-button>
+	    <h1>{{ anagram }}</h1>
+	    <span flex></span>
+	    
+	    
+            <md-menu class="no-drag">
+	      <md-button class="no-drag md-icon-button" ng-click="$mdOpenMenu()">
+		<md-icon md-menu-origin   style="fill: black;" md-menu-origin md-svg-icon="svg/menu.svg"></md-icon>
+	      </md-button>
+	      
+	      <md-menu-content>
+		<md-menu-item><md-button onclick="sendMessage('show-open-dialog')">Open ...</md-button></md-menu-item>
+		<md-menu-item><md-button onclick="sendMessage('new-window')">New Window</md-button></md-menu-item>			  
+	      </md-menu-content>			
+	    </md-menu>
+	    
+	    
+	    <md-button class="no-drag md-icon-button" aria-label="Close" onclick="sendMessage('window-close');">
+              <md-icon class="no-drag" md-svg-icon="svg/close.svg"></md-icon>
+	    </md-button>
 	  </div>
 	</md-toolbar>
-
+	
 	<iframe class="no-drag" frameborder="0" width="100%" id="frame-content" src="intro.html" ></iframe>
 	
   </body>

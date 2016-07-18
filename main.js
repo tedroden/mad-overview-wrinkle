@@ -10,7 +10,31 @@ const path = require('path');
 const shell = require('electron').shell;
 
 // for our app
-const marked = require('marked');
+
+var LANG_MAP = {
+    "shell": "bash",
+    "zsh": "zsh"
+};
+
+function _highlight(str, lang) {
+    if(lang) {
+	try {
+	    if(lang in LANG_MAP) { lang = LANG_MAP[lang]; }
+	    return require('highlight.js').highlight(lang, code).value;
+	}
+	catch (e) {}
+    }
+    // if we don't know the language...
+    return require('highlight.js').highlightAuto(code).value;
+}
+
+
+const md = require('markdown-it')({ html: true,
+                                    linkify: true,
+//                                    typographer: true,
+                                    highlight: _highlight })
+           .use(require('markdown-it-footnote'));
+
 const fs = require('fs');
 const md5 = require('md5');
 
@@ -28,7 +52,7 @@ const APP_TITLE = "Markdown Viewer";
 let windowList = [];
 
 var HEADER = "<html><head>" +
-    "<script src=\"http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js\"></script>" +
+    "<script src=\"angular.min.js\"></script>" +
     "<link rel='stylesheet' href='" + __dirname + "/styles/app.css'> \n" +
     "<link rel='stylesheet' href='" + __dirname + "/styles/github-markdown.css'> \n" +
     "<link rel='stylesheet' href='" + __dirname + "/styles/highlight/github.css'> \n" +
@@ -43,39 +67,8 @@ var last_md5 = null;
 // var OUTPUT_DIR = "./";
 var OPEN_FILES = {};
 
-var LANG_MAP = {
-    "shell": "bash",
-    "zsh": "zsh"
-};
-
 var FILE_START = ".mow-";
 
-// Synchronous highlighting with highlight.js
-// FIXME: get this working!
-marked.setOptions({
-    highlight: function (code, lang) {
-	if(lang) {
-	    try {
-		if(lang in LANG_MAP) { lang = LANG_MAP[lang]; }
-		return require('highlight.js').highlight(lang, code).value;
-	    }
-	    catch (e) {}
-	}
-	// if we don't know the language...
-	return require('highlight.js').highlightAuto(code).value;
-    }
-});
-
-
-var renderer = new marked.Renderer();
-renderer.listitem = function(text) {
-    var data = /^\[(.)\]/.exec(text);
-    if(data) {
-	var checked = data[1] == ' ' ? '' : 'checked';
-	text = "<input " + checked + " type='checkbox' /> " + text.substring(3);
-    }	
-    return "<li>" + text + "</li>";
-};
 
 ipc.on('asynchronous-message', function(event, arg) {
 
@@ -137,7 +130,7 @@ function monitor(fn, window) {
 	OPEN_FILES[file.input] = file;
 
 	// write the file.
-	var html = getHeader('markdown-body') + marked(data, { renderer: renderer }) + FOOTER;
+	var html = getHeader('markdown-body') + md.render(data) + FOOTER;
 	fs.writeFile(file.output, html);
 
 	// // load it.

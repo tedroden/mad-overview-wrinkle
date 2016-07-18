@@ -1,6 +1,6 @@
 {
   "name": "live-markdown-viewer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "productName": "Live Markdown Viewer",
   "description": "Automatically render (and reload) markdown in the style of github",
   "main": "main.js",
@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "highlight.js": "^9.1.0",
+    "markdown-it": "^7.0.0",
+    "markdown-it-footnote": "^3.0.0",
     "marked": "^0.3.5",
     "md5": "^2.0.0"
   }
